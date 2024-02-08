@@ -10,9 +10,10 @@ export default function Header({isUserLoggedIn}) {
         <h2 className='text-3xl p-3 leading-none'>Logo</h2>
       </Link>
       <nav>
+        <NavLink className='text-lg p-3 hover:bg-slate-700 hover:text-white' to={'/'}>Home</NavLink>
         {isUserLoggedIn && <NavLink className='text-lg p-3 hover:bg-slate-700 hover:text-white' to={'/products/add'}>Add Products</NavLink>}
         <NavLink className='text-lg p-3 hover:bg-slate-700 hover:text-white' to={'/products'}>Products</NavLink>
-        {!isUserLoggedIn && <NavLink className='text-lg p-3 hover:bg-slate-700 hover:text-white' to={'/login'}>Login</NavLink>}
+        {!isUserLoggedIn && <NavLink className='text-lg p-3 hover:bg-slate-700 hover:text-white' to={'/auth/login'}>Login</NavLink>}
         {isUserLoggedIn && <button className='text-lg p-3 hover:bg-slate-700 hover:text-white'>Logout</button>}
       </nav>
       </div>

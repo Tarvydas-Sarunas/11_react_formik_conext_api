@@ -56,7 +56,7 @@ function sendAxiosRequest(dataToSend) {
 }
 
   return (
-    <div className='container'>
+    <div className='mt-5'>
       <h2 className='text-3xl mb-8'>Login</h2>
 
 {/* 3. shove error in p tag formated as error */}

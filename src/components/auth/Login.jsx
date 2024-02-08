@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import Btn from '../ui/Btn';
 import axios from 'axios';
 
-export default function Login() {
+export default function Login({onLogin}) {
 
   // 1. sukurti state isError
 const [isError, setIsError] = useState('')
@@ -38,7 +38,8 @@ function sendAxiosRequest(dataToSend) {
     console.log('resp.data ===', resp.data);
     const {token} = resp.data
     // issaugoti i local storage
-    localStorage.setItem('userToken', token);
+    onLogin(token)
+    // localStorage.setItem('userToken', token);
     // istrinti klaida
     
 // redirectiname kitur

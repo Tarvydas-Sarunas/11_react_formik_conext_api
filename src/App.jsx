@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./components/auth/Login";
 import AddProduct from "./components/products/AddProduct";
 import ProductList from "./components/products/ProductList";
@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import ProductPage from "./pages/ProductPage";
 import AddProductPage from "./pages/AddProductPage";
+import UnAuthorizedPage from "./pages/UnAuthorizedPage";
 
 export default function App() {
   console.log('App susikure');
@@ -26,9 +27,11 @@ function handleLogin(gotToken) {
       <Header isUserLoggedIn={isUserLoggedIn} />
       <Routes>
         <Route path="/" element={<HomePage/>} />
-        <Route path="/auth/login" element={<AuthPage onLogin={handleLogin}/>} />
+        <Route path="/auth/login" element={ !isUserLoggedIn ? <AuthPage onLogin={handleLogin}/> : <Navigate to={'/products'} />  } />
         <Route path="/products" element={<ProductPage />} />
-        <Route path="/products/add" element={<AddProductPage />} />
+        {/* protected routes */}
+        <Route path="/products/add" element={ isUserLoggedIn ? <AddProductPage /> : <Navigate to={'/unauthorized'} />} />
+        <Route path="/unauthorized" element={<UnAuthorizedPage />} />
       </Routes>
         
     </div>

@@ -4,8 +4,11 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup';
 import Btn from '../ui/Btn';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login({onLogin}) {
+
+const navigate = useNavigate()
 
   // 1. sukurti state isError
 const [isError, setIsError] = useState('')
@@ -43,6 +46,7 @@ function sendAxiosRequest(dataToSend) {
     // istrinti klaida
     
 // redirectiname kitur
+navigate('/products')
   })
   .catch(error => {
     console.warn('ivyko klaida:', error);

@@ -1,3 +1,4 @@
+import Login from "./components/auth/Login";
 import AddProduct from "./components/products/AddProduct";
 
 export default function App() {
@@ -8,7 +9,8 @@ export default function App() {
       <h1 className='text-3xl font-bold underline'>Formik!</h1>
       </div>
       <hr />
-      <AddProduct />
+      {false && <AddProduct />}
+      <Login />
       
       
       

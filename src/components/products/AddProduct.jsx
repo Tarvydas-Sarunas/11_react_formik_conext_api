@@ -16,6 +16,14 @@ const product = {
   adminEmail: "",
 }
 
+function SmartInput({name, formik, type = 'text', placeholder}) {
+  return (<label className="block mb-4">
+  <span className="text-lg block first-letter:uppercase">{name}</span>
+  <input onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values[name]} name={name} className={`border w-full px-2 py-[5px] rounded-md ${formik.touched[name] && formik.errors[name] ? 'border-red-500 bg-red-50': 'border-slate-300' } `} type={type} placeholder={placeholder || 'Enter ' + name}/>
+ {formik.touched[name] && formik.errors[name] && <div className="bg-red-100 text-red-900 px-4 py-1 mt-2 rounded-md"><p>{formik.errors[name]}</p></div>}
+</label>)
+}
+
 export default function AddProduct() {
 
 const formik = useFormik({
@@ -81,13 +89,14 @@ console.log('formik errors===', formik.errors);
 <div>
   <p>Title: {formik.values.title}</p>
 </div>
-      <form onSubmit={formik.handleSubmit} className="grid grid-cols-2 gap-x-5">
+      <form noValidate onSubmit={formik.handleSubmit} className="grid grid-cols-2 gap-x-5">
         {/* one input */}
-        <label className="block mb-4">
+        <SmartInput name={'title'}  formik={formik}/>
+        {/* <label className="block mb-4">
           <span className="text-lg block ">Title</span>
           <input onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.title} name="title" className={`border w-full px-2 py-[5px] rounded-md ${formik.touched.title && formik.errors.title ? 'border-red-500 bg-red-50': 'border-slate-300' } `} type="text" placeholder="Enter Title"/>
          {formik.touched.title && formik.errors.title && <div className="bg-red-100 text-red-900 px-4 py-1 mt-2 rounded-md"><p>{formik.errors.title}</p></div>}
-        </label>
+        </label> */}
 
 {/* one input */}
 <label className="block mb-4">
@@ -100,48 +109,22 @@ console.log('formik errors===', formik.errors);
         </label>
         
         {/* one input */}
-        <label className="block mb-4">
-          <span className="text-lg block ">Price</span>
-          <input onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.price} name="price" className="border w-full px-2 py-[5px] border-slate-300 rounded-md" type="number" step={0.01} placeholder="Enter Price"/>
-          {formik.errors.price && <div className="bg-red-100 text-red-900 px-4 py-1 mt-2 rounded-md"><p>{formik.errors.price}</p></div>}
-        </label>
+        <SmartInput name={'price'}  formik={formik} type='number' placeholder='Enter title'/>
 
         {/* one input */}
-        <label className="block mb-4">
-          <span className="text-lg block ">Rating</span>
-          <input onChange={formik.handleChange} value={formik.values.rating} name="rating" className="border w-full px-2 py-[5px] border-slate-300 rounded-md" type="number" step={0.1} placeholder="Enter Rating"/>
-          {formik.errors.rating && <div className="bg-red-100 text-red-900 px-4 py-1 mt-2 rounded-md"><p>{formik.errors.rating}</p></div>}
-        </label>
+        <SmartInput name={'rating'}  formik={formik} type='number'/>
 
         {/* one input */}
-        <label className="block mb-4">
-          <span className="text-lg block ">Stock</span>
-          <input onChange={formik.handleChange} value={formik.values.stock} name="stock" className="border w-full px-2 py-[5px] border-slate-300 rounded-md" type="number" step={1} placeholder="Enter Stock"/>
-          {formik.errors.stock && <div className="bg-red-100 text-red-900 px-4 py-1 mt-2 rounded-md"><p>{formik.errors.stock}</p></div>}
-        </label>
-
-        
+        <SmartInput name={'stock'}  formik={formik} type='number'/>
+      
+        {/* one input */}
+        <SmartInput name={'category'}  formik={formik}/>
 
         {/* one input */}
-        <label className="block mb-4">
-          <span className="text-lg block ">Category</span>
-          <input onChange={formik.handleChange} value={formik.values.category} name="category" className="border w-full px-2 py-[5px] border-slate-300 rounded-md" type="text" step={1} placeholder="Enter Category"/>
-          {formik.errors.category && <div className="bg-red-100 text-red-900 px-4 py-1 mt-2 rounded-md"><p>{formik.errors.category}</p></div>}
-        </label>
+        <SmartInput name={'thumbnail'}  formik={formik}/>
 
         {/* one input */}
-        <label className="block mb-4">
-          <span className="text-lg block ">Thumbnail</span>
-          <input onChange={formik.handleChange} value={formik.values.thumbnail} name="thumbnail" className="border w-full px-2 py-[5px] border-slate-300 rounded-md" type="text" step={1} placeholder="Enter Thumbnail"/>
-          {formik.errors.thumbnail && <div className="bg-red-100 text-red-900 px-4 py-1 mt-2 rounded-md"><p>{formik.errors.thumbnail}</p></div>}
-        </label>
-
-        {/* one input */}
-        <label className="block mb-4">
-          <span className="text-lg block ">Email</span>
-          <input onChange={formik.handleChange} value={formik.values.adminEmail} name="adminEmail" className="border w-full px-2 py-[5px] border-slate-300 rounded-md" type="email" step={1} placeholder="Enter Email"/>
-          {formik.errors.adminEmail && <div className="bg-red-100 text-red-900 px-4 py-1 mt-2 rounded-md"><p>{formik.errors.adminEmail}</p></div>}
-        </label>
+        <SmartInput name={'adminEmail'} formik={formik} type='email'/>
 
 {/* one input */}
 <label className="block mb-4 col-span-2">

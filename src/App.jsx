@@ -4,6 +4,10 @@ import AddProduct from "./components/products/AddProduct";
 import ProductList from "./components/products/ProductList";
 import Header from "./components/layout/Header";
 import { useState } from "react";
+import HomePage from "./pages/HomePage";
+import AuthPage from "./pages/AuthPage";
+import ProductPage from "./pages/ProductPage";
+import AddProductPage from "./pages/AddProductPage";
 
 export default function App() {
   console.log('App susikure');
@@ -21,9 +25,10 @@ function handleLogin(gotToken) {
     <div className=''>
       <Header isUserLoggedIn={isUserLoggedIn} />
       <Routes>
-        <Route path="/login" element={<Login onLogin={handleLogin}/>} />
-        <Route path="/products" element={<ProductList />} />
-        <Route path="/products/add" element={<AddProduct />} />
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/auth/login" element={<AuthPage onLogin={handleLogin}/>} />
+        <Route path="/products" element={<ProductPage />} />
+        <Route path="/products/add" element={<AddProductPage />} />
       </Routes>
         
     </div>

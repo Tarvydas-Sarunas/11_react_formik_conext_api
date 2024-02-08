@@ -9,6 +9,7 @@ import AuthPage from "./pages/AuthPage";
 import ProductPage from "./pages/ProductPage";
 import AddProductPage from "./pages/AddProductPage";
 import UnAuthorizedPage from "./pages/UnAuthorizedPage";
+import SingleProductPage from "./pages/SingleProductPage";
 
 export default function App() {
   console.log('App susikure');
@@ -41,6 +42,7 @@ function handleLogout() {
         <Route path="/products" element={<ProductPage />} />
         {/* protected routes */}
         <Route path="/products/add" element={ isUserLoggedIn ? <AddProductPage /> : <Navigate to={'/unauthorized'} />} />
+        <Route path="/products/:prodId" element={<SingleProductPage />} />
         <Route path="/unauthorized" element={<UnAuthorizedPage />} />
       </Routes>
     </div>

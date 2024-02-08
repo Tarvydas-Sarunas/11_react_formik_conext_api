@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useFormik } from "formik"
 import * as Yup from 'yup';
+import Btn from "../ui/Btn";
 
 
 const product = {
@@ -134,7 +135,7 @@ console.log('formik errors===', formik.errors);
         </label>
 
         {/* btn */}
-        <button className="text-lg border px-6 py-2 border-slate-600 rounded-md hover:bg-indigo-600 hover:text-white transition-colors mt-6 place-self-start" type='submit'>Add</button>
+        <Btn type="submit">Add</Btn>
       </form>
       </div>
   )

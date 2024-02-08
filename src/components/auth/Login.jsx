@@ -39,10 +39,9 @@ function sendAxiosRequest(dataToSend) {
   .then((resp) => {
     console.log('resp ===', resp)
     console.log('resp.data ===', resp.data);
-    const {token} = resp.data
-    // issaugoti i local storage
-    onLogin(token)
-    // localStorage.setItem('userToken', token);
+    const {token, email} = resp.data
+
+    onLogin(token, email)
     // istrinti klaida
     
 // redirectiname kitur

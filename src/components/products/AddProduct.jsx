@@ -49,7 +49,7 @@ validationSchema: Yup.object({
   category: Yup.string().min(5).max(100).required(),
   thumbnail: Yup.string().min(5).max(100).required(),
   brand: Yup.string().min(5).max(100).required(),
-  adminEmail: Yup.string().email().required(),
+  adminEmail: Yup.string().matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Patikrinkite email').required(),
 
 }),
 

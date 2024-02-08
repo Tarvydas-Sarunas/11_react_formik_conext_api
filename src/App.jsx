@@ -13,18 +13,28 @@ import UnAuthorizedPage from "./pages/UnAuthorizedPage";
 export default function App() {
   console.log('App susikure');
 
-  const [token, setToken] = useState('')
+  const tokenFromStorage = localStorage.getItem('userToken')
+  const [token, setToken] = useState(tokenFromStorage || '')
   const [email, setEmail] = useState('')
 
 const isUserLoggedIn = Boolean(token)
 
-function handleLogin(gotToken) {
+function handleLogin(gotToken, gotEmail) {
   setToken(gotToken)
+  localStorage.setItem('userToken', gotToken);
+  setEmail(gotEmail)
+  localStorage.setItem('userEmail', gotEmail);
+}
+
+function handleLogout() {
+  setToken('')
+  localStorage.removeItem('userToken');
+  localStorage.removeItem('userEmail');
 }
 
   return (
     <div className=''>
-      <Header isUserLoggedIn={isUserLoggedIn} />
+      <Header isUserLoggedIn={isUserLoggedIn}  onLogout={handleLogout} onEmail={email} />
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/auth/login" element={ !isUserLoggedIn ? <AuthPage onLogin={handleLogin}/> : <Navigate to={'/products'} />  } />
@@ -33,7 +43,6 @@ function handleLogin(gotToken) {
         <Route path="/products/add" element={ isUserLoggedIn ? <AddProductPage /> : <Navigate to={'/unauthorized'} />} />
         <Route path="/unauthorized" element={<UnAuthorizedPage />} />
       </Routes>
-        
     </div>
   );
 }

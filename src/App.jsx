@@ -10,6 +10,7 @@ import ProductPage from "./pages/ProductPage";
 import AddProductPage from "./pages/AddProductPage";
 import UnAuthorizedPage from "./pages/UnAuthorizedPage";
 import SingleProductPage from "./pages/SingleProductPage";
+import AuthContext from "./store/AuthContext";
 
 export default function App() {
   console.log('App susikure');
@@ -33,7 +34,13 @@ function handleLogout() {
   localStorage.removeItem('userEmail');
 }
 
+const ctxValue = {
+  isUserLoggedIn: isUserLoggedIn,
+  logout: handleLogout,
+}
+
   return (
+    <AuthContext.Provider value={ctxValue}>
     <div className=''>
       <Header isUserLoggedIn={isUserLoggedIn}  onLogout={handleLogout} onEmail={email} />
       <Routes>
@@ -46,5 +53,6 @@ function handleLogout() {
         <Route path="/unauthorized" element={<UnAuthorizedPage />} />
       </Routes>
     </div>
+    </AuthContext.Provider>
   );
 }
